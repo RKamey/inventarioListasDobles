@@ -4,16 +4,12 @@ class Inventario {
     }
 
     agregar(producto) {
-        let aux = this.primero;
-
-        if (aux == null) {
+        if (this.primero === null) {
             this.primero = producto;
         } else {
-            while (aux.next != null) {
-                aux = aux.next;
-            }
-            aux.next = producto;
-            return true;
+            producto.next = this.primero;
+            this.primero.prev = producto;
+            this.primero = producto;
         }
     }
 
