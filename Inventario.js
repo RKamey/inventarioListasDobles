@@ -1,17 +1,19 @@
 class Inventario {
     constructor() {
         this.primero = null;
+        this.ultimo = null
     }
 
-    agregar(producto) {
-        if (this.primero === null) {
-            this.primero = producto;
+    agregar(nuevo) {
+        if (!this.primero) {
+            this.primero = nuevo;
+            this.ultimo = nuevo;
         } else {
-            producto.next = this.primero;
-            this.primero.prev = producto;
-            this.primero = producto;
+            this.ultimo.next = nuevo;
+            nuevo.prev = this.ultimo;
+            this.ultimo = nuevo;
         }
-    }
+    }  
 
     buscar(codigo) {
         let aux = this.primero;
@@ -30,7 +32,7 @@ class Inventario {
         let aux = this.primero;
         let lista = '';
 
-        while (aux != null) {
+        while (aux) {
             lista += ProductRow(aux);
             aux = aux.next;
         }
