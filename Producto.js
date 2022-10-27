@@ -23,8 +23,4 @@ class Producto {
     getPrecio() {
         return this.precio;
     }
-
-    getInfo() {
-        return `Codigo: ${this.codigo}, Nombre: ${this.nombre}, Cantidad: ${this.cantidad}, Precio: $${this.precio} | `;
-    }
 }

@@ -8,18 +8,37 @@ class Inventario {
         if (!this.primero) {
             this.primero = nuevo;
             this.ultimo = nuevo;
-        } else {
+        } else if (this.primero.getCodigo() > nuevo.getCodigo()) {
+            let aux = this.primero
+            nuevo.next = this.primero;
+            this.primero.prev = nuevo;
+            this.primero = nuevo;
+            this.ultimo = aux;
+        }   else if (this.ultimo.getCodigo() < nuevo.getCodigo()) {
             this.ultimo.next = nuevo;
             nuevo.prev = this.ultimo;
             this.ultimo = nuevo;
+        } else {
+            let aux = this.primero;
+            while (aux.next != null) {
+                if (aux.next.getCodigo() > nuevo.getCodigo()) {
+                    nuevo.next = aux.next;
+                    nuevo.prev = aux;
+                    aux.next.prev = nuevo;
+                    aux.next = nuevo;
+                    break;
+                } else {
+                    aux = aux.next;
+                }
+            }
         }
-    }  
+    }
 
     buscar(codigo) {
         let aux = this.primero;
 
         while (aux != null) {
-            if (aux.codigo == codigo) {
+            if (aux.getCodigo() == codigo) {
                 return aux;
             } else {
                 aux = aux.next;
@@ -53,21 +72,21 @@ class Inventario {
     eliminar(codigo) {
         let aux = this.primero;
 
-        if (aux == null) {
-            return false;
-        } else {
-            if (aux.codigo == codigo) {
-                this.primero = aux.next;
+        while (aux != null) {
+            if (aux.getCodigo() == codigo) {
+                if (aux.prev) {
+                    aux.prev.next = aux.next;
+                } else {
+                    this.primero = aux.next;
+                }
+                if (aux.next) {
+                    aux.next.prev = aux.prev;
+                } else {
+                    this.ultimo = aux.prev;
+                }
                 return true;
             } else {
-                while (aux.next != null) {
-                    if (aux.next.codigo == codigo) {
-                        aux.next = aux.next.next;
-                        return true;
-                    } else {
-                        aux = aux.next;
-                    }
-                }
+                aux = aux.next;
             }
         }
         return false;

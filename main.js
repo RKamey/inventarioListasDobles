@@ -11,12 +11,12 @@ const formAgregar = document.getElementById('form-agregar');
 const formEliminar = document.getElementById('form-eliminar');
 const containerTabla = document.getElementById('divTabla');
 
-const Validar = (codigo, nombre, cantidad, precio) => {
-    if (codigo === '' || nombre === '' || cantidad === '' || precio === '') {
-        alert('Todos los campos son obligatorios');
-        return;
-    }
-}
+// const Validar = (codigo, nombre, cantidad, precio) => {
+//     if (codigo === '' || nombre === '' || cantidad === '' || precio === '') {
+//         alert('Todos los campos son obligatorios');
+//         return;
+//     }
+// }
 
 btnAgregar.addEventListener('click', () => {
     let codigo = document.getElementById('codigo-p').value;
@@ -25,7 +25,7 @@ btnAgregar.addEventListener('click', () => {
     let cantidad = document.getElementById('cantidad-p').value;
 
     //validar
-    Validar(codigo, nombre, cantidad, precio);
+    // Validar(codigo, nombre, cantidad, precio);
 
     inventario.agregar(new Producto(codigo, nombre, cantidad, precio));
     historial.innerHTML += `<p>Se agrego el producto ${nombre}</p>`;
